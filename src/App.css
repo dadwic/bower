@@ -1,0 +1,18 @@
+.logo {
+  display: block;
+  width: 140px;
+  margin-right: 48px;
+}
+a img.logo {
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+.page-title {
+  font-size: 64px;
+  font-weight: bold;
+  letter-spacing: -0.025em;
+  margin: 0;
+  padding: 0;
+  padding-top: 30px;
+  padding-left: 220px;
+}
