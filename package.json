@@ -1,17 +1,19 @@
 {
-  "name": "create-react-app-with-typescript",
-  "version": "5.0.0",
+  "name": "bower-mimics",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@emotion/react": "latest",
     "@emotion/styled": "latest",
     "@mui/icons-material": "^5.5.1",
     "@mui/material": "latest",
+    "@reduxjs/toolkit": "^1.8.0",
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "axios": "^0.26.1",
     "react": "latest",
     "react-dom": "latest",
+    "react-redux": "^7.2.6",
     "react-router-dom": "^6.2.2",
     "react-scripts": "latest",
     "typescript": "latest"

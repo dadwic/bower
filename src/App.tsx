@@ -1,12 +1,11 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import Footer from "./components/Footer";
-import Search from "./pages/Search";
+import SearchPage from "pages/SearchPage";
 
 export default function App() {
   return (
     <Routes>
-      <Route path="search" element={<Search />} />
+      <Route path="search" element={<SearchPage />} />
       <Route path="*" element={<Navigate to="search" />} />
     </Routes>
   );

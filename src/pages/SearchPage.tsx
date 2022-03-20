@@ -1,50 +1,28 @@
 import * as React from "react";
-import { styled, alpha } from "@mui/material/styles";
+import { useSearchParams } from "react-router-dom";
+import { styled } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import MuiDrawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
+import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Container from "@mui/material/Container";
-import InputBase from "@mui/material/InputBase";
 import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
-import SearchIcon from "@mui/icons-material/Search";
-import { mainListItems } from "./listItems";
-import Orders from "./Orders";
-import Footer from "../components/Footer";
-
-function Copyright(props: any) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+import Footer from "components/Footer";
+import Search from "components/Search";
+import Packages from "components/Packages";
+import { mainListItems } from "components/listItems";
+import { API_KEY, API_PER_PAGE } from "../constants";
+import { SortType, AppBarProps } from "types";
 
 const drawerWidth: number = 240;
-
-interface AppBarProps extends MuiAppBarProps {
-  open?: boolean;
-}
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -87,45 +65,16 @@ const Drawer = styled(MuiDrawer, {
   },
 }));
 
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.black, 0.15),
-  "&:hover": {
-    backgroundColor: alpha(theme.palette.common.black, 0.2),
-  },
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
-  width: "100%",
-}));
-
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("md")]: {
-      width: "20ch",
-    },
-  },
-}));
-
 export default function SearchPage() {
+  const [data, setData] = React.useState([]);
   const [open, setOpen] = React.useState(true);
+  const [loading, setLoading] = React.useState(true);
   const matches = useMediaQuery("(max-width:600px)");
+
+  let [searchParams, setSearchParams] = useSearchParams();
+  let searchText: string = searchParams.get("q") || "";
+  let searchPage: number = Number(searchParams.get("page") || 1);
+  let searchSort: SortType = (searchParams.get("sort") as SortType) || "";
 
   React.useEffect(() => {
     setOpen(!matches);
@@ -133,6 +82,36 @@ export default function SearchPage() {
 
   const toggleDrawer = () => {
     setOpen(!open);
+  };
+
+  React.useEffect(() => {
+    let abortController = new AbortController();
+
+    async function searchPackages() {
+      setLoading(true);
+      let response = await fetch(
+        `https://libraries.io/api/search?q=${searchText}&sort=${searchSort}&page=${searchPage}&per_page=${API_PER_PAGE}&api_key=${API_KEY}`,
+        {
+          signal: abortController.signal,
+        }
+      );
+      if (!abortController.signal.aborted) {
+        let data = await response.json();
+        setLoading(false);
+        setData(data);
+      }
+    }
+
+    // Get data
+    searchPackages();
+
+    return () => {
+      abortController.abort();
+    };
+  }, [searchText]);
+
+  const handleChangeSearchText = (text: string) => {
+    setSearchParams({ q: text.trim(), page: "1" });
   };
 
   return (
@@ -156,16 +135,7 @@ export default function SearchPage() {
           >
             <MenuIcon />
           </IconButton>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              fullWidth
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
+          <Search initialValue={searchText} onChange={handleChangeSearchText} />
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
@@ -211,9 +181,7 @@ export default function SearchPage() {
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
           <Grid container spacing={3}>
             <Grid item xs={12}>
-              <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-                <Orders />
-              </Paper>
+              <Packages loading={loading} />
             </Grid>
           </Grid>
         </Container>
