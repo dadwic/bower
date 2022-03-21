@@ -1,4 +1,4 @@
-# [Bower Search](bower-mimics.vercel.app)
+# [Bower Search](https://bower-mimics.vercel.app)
 
 The site is built with [React](https://reactjs.org) and served with Vercel.
 
