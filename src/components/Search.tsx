@@ -51,6 +51,7 @@ const Search = () => {
   };
 
   React.useEffect(() => {
+    // Use interval to prevent duplicate requests
     const timeout = setTimeout(() => {
       setSearchParams({ q: value.trim(), page: "1" });
     }, 500);

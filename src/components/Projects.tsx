@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment";
 import Humanize from "humanize-plus";
 import { useSearchParams } from "react-router-dom";
 import Box from "@mui/system/Box";
@@ -26,9 +27,8 @@ import {
 } from "redux/selectors";
 import Maybe from "./Maybe";
 import Sort from "./Sort";
-import moment from "moment";
 
-export default function Packages() {
+export default function Projects() {
   const loading = useAppSelector(selectLoading);
   const projects = useAppSelector(selectProjects);
   const error = useAppSelector(selectProjectsError);
