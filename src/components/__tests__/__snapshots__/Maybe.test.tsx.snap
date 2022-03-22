@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Maybe should corretly match snapshot 1`] = `
+<span>
+  Visible
+</span>
+`;

@@ -42,8 +42,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const Search = () => {
-  let [searchParams, setSearchParams] = useSearchParams();
-  let searchText: string = searchParams.get("q") || "";
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchText: string = searchParams.get("q") || "";
   const [value, setValue] = React.useState<string>(searchText);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

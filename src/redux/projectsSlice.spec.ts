@@ -1,26 +1,49 @@
-import projectsReducer from "./projectsSlice";
+import { AnyAction } from "redux";
+import projectsRedcuer, {
+  initialState,
+  projectsLoaded,
+  projectsFailure,
+} from "./projectsSlice";
+import { projectsMock } from "__mocks__";
+import { ProjectsState } from "types/Project";
 
-describe("counter reducer", () => {
-  //   const initialState: CounterState = {
-  //     value: 3,
-  //     status: "idle",
-  //   };
-  //   it("should handle initial state", () => {
-  //     expect(counterReducer(undefined, { type: "unknown" })).toEqual({
-  //       value: 0,
-  //       status: "idle",
-  //     });
-  //   });
-  //   it("should handle increment", () => {
-  //     const actual = counterReducer(initialState, increment());
-  //     expect(actual.value).toEqual(4);
-  //   });
-  //   it("should handle decrement", () => {
-  //     const actual = counterReducer(initialState, decrement());
-  //     expect(actual.value).toEqual(2);
-  //   });
-  //   it("should handle incrementByAmount", () => {
-  //     const actual = counterReducer(initialState, incrementByAmount(2));
-  //     expect(actual.value).toEqual(5);
-  //   });
+describe("projectsRedcuer", () => {
+  it("should return the initial state", () => {
+    expect(projectsRedcuer(undefined, {} as AnyAction)).toEqual({
+      ...initialState,
+    });
+  });
+
+  it("should handle projectsLoaded", () => {
+    const nextState: ProjectsState = {
+      error: null,
+      loading: false,
+      count: projectsMock.length,
+      projects: projectsMock,
+    };
+
+    expect(
+      projectsRedcuer(
+        undefined,
+        projectsLoaded({
+          data: projectsMock,
+          total: projectsMock.length,
+        })
+      )
+    ).toEqual(nextState);
+  });
+
+  it("should handle projectsFailure", () => {
+    const nextState: ProjectsState = {
+      ...initialState,
+      count: 0,
+      loading: false,
+      projects: [],
+      error: "error response",
+    };
+
+    expect(
+      projectsRedcuer(initialState, projectsFailure("error response"))
+    ).toEqual(nextState);
+  });
 });

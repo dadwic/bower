@@ -1,14 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Project } from "types/Project";
+import { Project, ProjectsState } from "types/Project";
 
-export interface projectsState {
-  count: number;
-  error: string | null;
-  loading: boolean;
-  projects: Project[];
-}
-
-const initialState: projectsState = {
+export const initialState: ProjectsState = {
   count: 0,
   error: null,
   loading: false,
@@ -22,15 +15,24 @@ export const projectsSlice = createSlice({
     projectsLoading: (state) => {
       state.loading = true;
     },
-    // TODO:test
-    projectsLoaded: (state, action: PayloadAction<any>) => {
+    projectsLoaded: (
+      state,
+      action: PayloadAction<{ data: Project[]; total: number }>
+    ) => {
       state.projects = action.payload.data;
       state.count = action.payload.total;
       state.loading = false;
     },
+    projectsFailure: (state, action: PayloadAction<string>) => {
+      state.count = 0;
+      state.projects = [];
+      state.loading = false;
+      state.error = action.payload;
+    },
   },
 });
 
-export const { projectsLoading, projectsLoaded } = projectsSlice.actions;
+export const { projectsLoading, projectsLoaded, projectsFailure } =
+  projectsSlice.actions;
 
 export default projectsSlice.reducer;

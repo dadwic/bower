@@ -33,8 +33,10 @@
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
     "@types/humanize-plus": "^1.8.0",
+    "@types/react-test-renderer": "^17.0.1",
     "husky": "^7.0.4",
-    "prettier": "2.5.1"
+    "prettier": "2.5.1",
+    "react-test-renderer": "^17.0.2"
   },
   "browserslist": {
     "production": [

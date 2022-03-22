@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { useSearchParams } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
@@ -14,10 +14,10 @@ import { SortType } from "types";
 
 export default function SearchPage() {
   const dispatch = useAppDispatch();
-  let [searchParams] = useSearchParams();
-  let searchText: string = searchParams.get("q") || "";
-  let searchPage: number = Number(searchParams.get("page") || 1);
-  let searchSort: SortType = (searchParams.get("sort") as SortType) || "";
+  const [searchParams] = useSearchParams();
+  const searchText: string = searchParams.get("q") || "";
+  const searchPage: number = Number(searchParams.get("page") || 1);
+  const searchSort: SortType = (searchParams.get("sort") as SortType) || "";
 
   React.useEffect(() => {
     dispatch(fetchAsync(searchText, searchSort, searchPage));

@@ -11,6 +11,7 @@ import Pagination from "@mui/material/Pagination";
 import Skeleton from "@mui/material/Skeleton";
 import Avatar from "@mui/material/Avatar";
 import Rating from "@mui/material/Rating";
+import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import Link from "@mui/material/Link";
 import TimeIcon from "@mui/icons-material/AccessTime";
@@ -21,6 +22,7 @@ import {
   selectLoading,
   selectProjects,
   selectProjectsCount,
+  selectProjectsError,
 } from "redux/selectors";
 import Maybe from "./Maybe";
 import Sort from "./Sort";
@@ -29,9 +31,10 @@ import moment from "moment";
 export default function Packages() {
   const loading = useAppSelector(selectLoading);
   const projects = useAppSelector(selectProjects);
+  const error = useAppSelector(selectProjectsError);
   const count = useAppSelector(selectProjectsCount);
-  let [searchParams, setSearchParams] = useSearchParams();
-  let searchPage: number = Number(searchParams.get("page") || 1);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchPage: number = Number(searchParams.get("page") || 1);
 
   const handleChangePage = (_: React.ChangeEvent<unknown>, value: number) => {
     setSearchParams({
@@ -103,6 +106,7 @@ export default function Packages() {
       <Maybe condition={!loading}>
         <Stack spacing={2}>
           <Sort />
+          {error && <Alert severity="error">{error}</Alert>}
           {projects.map((project, key) => (
             <Card key={key}>
               <CardHeader

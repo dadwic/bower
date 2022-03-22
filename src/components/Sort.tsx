@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { useSearchParams } from "react-router-dom";
 import SelectUnstyled, {
   SelectUnstyledProps,
@@ -149,8 +149,8 @@ function CustomSelect(props: SelectUnstyledProps<string>) {
 }
 
 export default function Sort() {
-  let [searchParams, setSearchParams] = useSearchParams();
-  let searchSort: SortType = (searchParams.get("sort") as SortType) || "";
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchSort: SortType = (searchParams.get("sort") as SortType) || "";
   const [value, setValue] = React.useState<string | null>(searchSort);
 
   React.useEffect(() => {

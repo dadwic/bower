@@ -7,16 +7,12 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
-import { mainListItems } from "./listItems";
+import ListItems from "components/ListItems";
 import Search from "./Search";
 
 const drawerWidth = 240;
 
 interface Props {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
   window?: () => Window;
 }
 
@@ -36,7 +32,7 @@ export default function ResponsiveDrawer(props: Props) {
         </Typography>
       </Toolbar>
       <Divider />
-      {mainListItems}
+      <ListItems />
     </div>
   );
 
