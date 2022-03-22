@@ -9,7 +9,7 @@ import Footer from "components/Footer";
 import Projects from "components/Projects";
 import { useAppDispatch } from "hooks";
 import ResponsiveDrawer from "components/ResponsiveDrawer";
-import { fetchAsync } from "redux/projectsSlice";
+import { fetchAsync } from "redux/actions";
 import { SortType } from "types";
 
 export default function SearchPage() {
@@ -21,7 +21,7 @@ export default function SearchPage() {
 
   React.useEffect(() => {
     dispatch(fetchAsync(searchText, searchSort, searchPage));
-  }, [searchText]);
+  }, [searchText, searchSort, searchPage]);
 
   return (
     <Box sx={{ display: "flex" }}>

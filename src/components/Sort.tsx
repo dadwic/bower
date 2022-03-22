@@ -52,6 +52,11 @@ const StyledButton = styled("button")(
   line-height: 1.5;
   color: ${theme.palette.mode === "dark" ? grey[300] : grey[900]};
 
+  ${theme.breakpoints.down("sm")} {
+    min-width: 0px;
+    width: 100%;
+  }
+
   &:hover {
     background: ${theme.palette.mode === "dark" ? "" : grey[100]};
     border-color: ${theme.palette.mode === "dark" ? grey[700] : grey[400]};
@@ -150,10 +155,13 @@ export default function Sort() {
 
   React.useEffect(() => {
     if (value) {
-      setSearchParams({ sort: value });
+      setSearchParams({
+        ...Object.fromEntries(searchParams.entries()),
+        sort: value,
+      });
     } else {
       searchParams.delete("sort");
-      setSearchParams(searchParams);
+      setSearchParams(Object.fromEntries(searchParams.entries()));
     }
   }, [value]);
 
@@ -162,7 +170,7 @@ export default function Sort() {
   };
 
   return (
-    <Stack spacing={2} direction="row" alignItems="center" mb={2}>
+    <Stack spacing={2} direction="row" alignItems="center">
       <SortIcon />
       <CustomSelect value={value} onChange={setValue}>
         <StyledOption value="">Relevance</StyledOption>

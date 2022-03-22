@@ -1,10 +1,18 @@
-import * as React from "react";
+import React from "react";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
 import Box from "@mui/material/Box";
 import Zoom from "@mui/material/Zoom";
-import { BaseProps } from "types";
 
-export default function ScrollTop(props: BaseProps) {
+export interface Props {
+  /**
+   * Injected by the documentation to work in an iframe.
+   * You won't need it on your project.
+   */
+  window?: () => Window;
+  children?: React.ReactElement | null;
+}
+
+export default function ScrollTop(props: Props) {
   const { children, window } = props;
   // Note that you normally won't need to set the window ref as useScrollTrigger
   // will default to window.

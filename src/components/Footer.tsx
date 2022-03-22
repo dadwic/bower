@@ -5,8 +5,16 @@ import Fab from "@mui/material/Fab";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { BaseProps } from "types";
 import ScrollTop from "./ScrollTop";
+
+export interface Props {
+  /**
+   * Injected by the documentation to work in an iframe.
+   * You won't need it on your project.
+   */
+  window?: () => Window;
+  children?: React.ReactElement | null;
+}
 
 function Copyright() {
   return (
@@ -16,7 +24,7 @@ function Copyright() {
   );
 }
 
-export default function Footer(props: BaseProps) {
+export default function Footer(props: Props) {
   return (
     <Box
       component="footer"
