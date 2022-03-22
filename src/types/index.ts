@@ -9,18 +9,6 @@ export interface SearchProps {
   onChange: (value: string) => void;
 }
 
-export interface updateSearchQuery {
-  ({
-    page,
-    text,
-    sort,
-  }: {
-    page?: number;
-    text?: string;
-    sort?: SortType;
-  }): void;
-}
-
 export type SortType =
   | "stars"
   | "rank"

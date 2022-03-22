@@ -1,8 +1,16 @@
 import React from "react";
 import Box from "@mui/material/Box";
+import Link from "@mui/material/Link";
+import Fab from "@mui/material/Fab";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import Link from "@mui/material/Link";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import ScrollTop from "./ScrollTop";
+
+export interface Props {
+  window?: () => Window;
+  children?: React.ReactElement | null;
+}
 
 function Copyright() {
   return (
@@ -12,7 +20,7 @@ function Copyright() {
   );
 }
 
-export default function Footer() {
+export default function Footer(props: Props) {
   return (
     <Box
       component="footer"
@@ -35,6 +43,11 @@ export default function Footer() {
         </Typography>
         <Copyright />
       </Container>
+      <ScrollTop {...props}>
+        <Fab color="info" size="small" aria-label="scroll back to top">
+          <KeyboardArrowUpIcon />
+        </Fab>
+      </ScrollTop>
     </Box>
   );
 }

@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useSearchParams } from "react-router-dom";
 import { styled, alpha } from "@mui/material/styles";
 import Zoom from "@mui/material/Zoom";
 import InputBase from "@mui/material/InputBase";
@@ -6,8 +7,6 @@ import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
 import ClearIcon from "@mui/icons-material/Clear";
-import { SearchProps } from "types";
-import { useNavigate } from "react-router-dom";
 
 const SearchBox = styled("div")(({ theme }) => ({
   position: "relative",
@@ -42,18 +41,18 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const Search: React.FC<SearchProps> = ({ initialValue, onChange }) => {
-  let navigate = useNavigate();
-  const [value, setValue] = React.useState<string>(initialValue);
+const Search = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchText: string = searchParams.get("q") || "";
+  const [value, setValue] = React.useState<string>(searchText);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
   };
 
   React.useEffect(() => {
-    // TODO: Display
     const timeout = setTimeout(() => {
-      onChange(value);
+      setSearchParams({ q: value.trim(), page: "1" });
     }, 500);
 
     return () => {
@@ -61,8 +60,13 @@ const Search: React.FC<SearchProps> = ({ initialValue, onChange }) => {
     };
   }, [value]);
 
+  React.useEffect(() => {
+    // Reset search input if url has changed
+    setValue(searchText);
+  }, [searchText]);
+
   const handleClear = () => {
-    setValue("");
+    setSearchParams({});
   };
 
   return (

@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer should corretly match snapshot 1`] = `
+<footer
+  className="MuiBox-root css-9jyc04"
+>
+  <div
+    className="MuiContainer-root MuiContainer-maxWidthSm css-cuefkz-MuiContainer-root"
+  >
+    <p
+      className="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+    >
+      Made with ❤️ by
+       
+      <a
+        className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1kgfegd-MuiTypography-root-MuiLink-root"
+        href="http://dadwic.com/"
+        onBlur={[Function]}
+        onFocus={[Function]}
+        target="_blank"
+      >
+        @dadwic
+      </a>
+    </p>
+    <p
+      className="MuiTypography-root MuiTypography-body2 css-r40f8v-MuiTypography-root"
+    >
+      Copyright © 2022
+    </p>
+  </div>
+  <div
+    className="MuiBox-root css-mgur8"
+    onClick={[Function]}
+    role="presentation"
+    style={
+      Object {
+        "transform": "scale(0)",
+        "visibility": "hidden",
+      }
+    }
+  >
+    <button
+      aria-label="scroll back to top"
+      className="MuiButtonBase-root MuiFab-root MuiFab-circular MuiFab-sizeSmall MuiFab-info css-10ma2jt-MuiButtonBase-root-MuiFab-root"
+      disabled={false}
+      onBlur={[Function]}
+      onContextMenu={[Function]}
+      onDragLeave={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex={0}
+      type="button"
+    >
+      <svg
+        aria-hidden={true}
+        className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+        data-testid="KeyboardArrowUpIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M7.41 15.41 12 10.83l4.59 4.58L18 14l-6-6-6 6z"
+        />
+      </svg>
+    </button>
+  </div>
+</footer>
+`;

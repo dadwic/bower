@@ -1,6 +1,6 @@
 {
   "name": "bower-mimics",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "dependencies": {
     "@emotion/react": "latest",
@@ -8,9 +8,12 @@
     "@mui/icons-material": "^5.5.1",
     "@mui/material": "latest",
     "@reduxjs/toolkit": "^1.8.0",
+    "@types/jest": "^27.4.1",
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "axios": "^0.26.1",
+    "humanize-plus": "^1.8.2",
+    "moment": "^2.29.1",
     "react": "latest",
     "react-dom": "latest",
     "react-redux": "^7.2.6",
@@ -26,8 +29,14 @@
     "prepare": "husky install"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.2",
+    "@testing-library/react": "^12.1.4",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/humanize-plus": "^1.8.0",
+    "@types/react-test-renderer": "^17.0.1",
     "husky": "^7.0.4",
-    "prettier": "2.5.1"
+    "prettier": "2.5.1",
+    "react-test-renderer": "^17.0.2"
   },
   "browserslist": {
     "production": [
